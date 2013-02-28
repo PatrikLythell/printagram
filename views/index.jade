@@ -1,13 +1,48 @@
 extends layout
 
 block header
-  .row
-    span.span4
-      h1= title
   
 block content
   .row
-    span.span8
-      a(href="/google-auth") Connect to google
+    .span10.offset1.cloud
+      .row-fluid
+        .span4.offset4.icons
+
+  .row
+    .span4.offset4.rounded
+      .bar
+    .span4.offset4.rainbow
+      .span1.border
+        .overlay
+        .color.red
+          .moving
+      .span1.border
+        .overlay
+        .color.yellow
+          .moving
+      .span1.border
+        .overlay
+        .color.green
+          .moving
+      .span1.border
+        .overlay
+        .color.blue
+          .moving
+  .row
+    .span12.pic
+
+  .row
+    .span4.instructions
+      span.number 1
+      p Connect your Google Cloud Ready printer and your Instagram account to Print-A-Gram.
+    .span4.instructions
+      span.number 2
+      p Snap that shit! Make sure it's a cat. Get your like-fix on and enjoy yourself.
+    .span4.instructions
+      span.number 3
+      p Have it printed and waiting for you in polaroids by the time you get home.
+    
+
+      // a(href="/google-auth") Connect to google
 
 

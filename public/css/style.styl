@@ -1,0 +1,158 @@
+@import url('http://fonts.googleapis.com/css?family=Bitter')
+
+red = #FF4057
+yellow = #FFF540
+green = #78C130
+blue = #3DB5F2
+dark = #333333
+light = #f7f6ef
+
+body
+  background: light
+  font-family: 'Bitter', serif
+  font-size: 1.1em
+
+.cloud
+  background: url('../img/cloudagram_03.png') center center no-repeat
+  height: 500px
+  background-size: 650px auto
+
+.pic
+  height: 440px
+  background: url('../img/cloudagram_pic.png') 0px 15px no-repeat
+  background-size: 1000px auto
+  margin-left: 0
+  padding: 0 60px 0 0
+
+.icons
+  margin-top: 200px
+  height: 150px
+  background: url('../img/sprite-top.png') no-repeat
+  -webkit-animation: icons 10s linear infinite
+
+.rainbow
+  height: 600px
+  margin-top: -140px
+  z-index: 2
+
+.border
+  border: 15px solid #333333
+  height: 100%
+  margin: 0 -15px 0 0
+  border-radius: 10px 10px 0 0
+
+.rounded
+  margin-top: -140px
+.bar
+  height: 20px 
+  border-radius: 20px
+  background: dark
+  width: 110%
+  margin-left: -8px
+
+.color
+  margin-top: -5px
+  height: 610px
+  border-radius: 5px 5px 0 0
+  overflow: hidden
+
+.overlay
+  width: 60px
+  height: 30px
+  position: absolute
+  margin-top: -5px
+  border-radius: 5px 5px 0 0
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,.4)), to(rgba(255,255,255,0)))
+
+.moving
+  width: 100%
+
+.red
+  background: red
+
+.yellow
+  background: yellow
+
+.green
+  background: green
+
+.blue
+  background: blue
+
+.instructions
+  text-align: center
+  margin-bottom: 100px
+  p
+    width: 75%
+    text-align: left
+    margin: 40px auto
+.number
+  text-align: center
+  font-size: 48px
+  color: light
+  border-radius: 50px
+  background: dark
+  padding: 20px 35px
+
+
+
+@-webkit-keyframes move
+  from
+    margin-top: -5000px
+  to
+    margin-top: 2000px
+
+rotate(deg)
+  -webkit-transform: rotateY(deg)
+
+@-webkit-keyframes icons
+  0%
+    background-position: 0 0
+    opacity: 0
+  5%
+    opacity: 1
+  20%
+    rotate(0deg)
+  25%
+    rotate(360deg)
+  28%
+    rotate(720deg)
+  29.5%
+    background-position: 0 0 
+  30%
+    rotate(1080deg)
+    background-position: -250px 0
+  32%
+    rotate(1420deg)
+  35%
+    rotate(1780deg)
+  40%
+    rotate(2140deg)
+    background-position: -250px 0
+  60%
+    rotate(2140deg)
+  65%
+    rotate(1780deg)
+  68%
+    rotate(1420deg)
+  69.5%
+    background-position: -250px 0 
+  70%
+    rotate(1080deg)
+    background-position: -500px 0
+  72%
+    rotate(720deg)
+  75%
+    rotate(360deg)
+  80%
+    rotate(0deg)
+    background-position: -500px 0
+  90%
+    rotate(0deg)
+    background-position: -500px 0
+  95%
+    background-position: -500px 0
+    opacity: 1
+  100%
+    background-position: -500px 0
+    opacity: 0
