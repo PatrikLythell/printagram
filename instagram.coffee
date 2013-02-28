@@ -31,7 +31,18 @@ module.exports =
       throw err if err
       callback(JSON.parse(body))
 
-  subscribe: (tag, callback) ->
+  getMedia: (token, callback) ->
+    params =
+      access_token: token
+      count: 1
+    request.get
+      url: 'https://api.instagram.com/v1/users/self/feed'
+      qs: params
+    , (err, res, body) ->
+      throw err if err
+      callback(JSON.parse(body))
+
+  subscribe: (callback) ->
     console.log "subscribe"
     params = 
       client_id     : client_id
@@ -39,7 +50,7 @@ module.exports =
       object        : 'user'
       aspect        : 'media'
       # object_id     : tag
-      callback_url  : 'http://4f7e.localtunnel.com/push'
+      callback_url  : 'http://prin.localtunnel.me/push'
     console.log params
     request.post
       url: 'https://api.instagram.com/v1/subscriptions/'
