@@ -13,6 +13,8 @@ hej = "https://www.google.com/cloudprint/submit?title=test&content=http://distil
 
 apiBase = 'https://www.google.com/cloudprint/'
 
+thing = "https://www.google.com/cloudprint/submit?title=test&content=http://distilleryimage2.s3.amazonaws.com/522d70fc81fd11e2a5bc22000a9e2899_7.jpg&tag=test&contentType=url&printerid=39426f74-808d-6637-8566-84951bf1c629"
+
 module.exports =
 
 	# CONFIGS
@@ -60,11 +62,12 @@ module.exports =
 			else if res.statusCode is 401
 				console.log "nope"
 
-	test: ->
-		token = 'ya29.AHES6ZQrbctO7uVG13GlnZ4Pi22PNZmwck64vQZOiuyHMFmpcfFEGg'
+	print: (image, printerid, token, callback) ->
 		request.get
-			url: apiBase+'submit'
+			url: "#{apiBase}submit?title=test&content=#{image}&tag=null&contentType=url&printerid=#{printerid}"
 			headers:
-				authorization: "Bearer #{token}"
-			, (err, res, body) ->
-				console.log body
+				"X-Cloudprint-Proxy": "Google-JS"
+				Authorization: "Bearer #{token}"
+		, (err, res, body) ->
+			console.log res
+			callback(JSON.parse(body))

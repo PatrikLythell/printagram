@@ -43,8 +43,6 @@ app.configure 'production', () ->
 
 # ROUTES
 
-uid = '8247617' 
-
 app.get '/', (req, res) ->
 	instagram.getSubscriptions (resp) ->
 		console.log resp
@@ -77,12 +75,15 @@ app.get '/create-push', (req, res) ->
 
 app.post '/push', (req, res) ->
 	console.log req.body
-	db.users.findOne {id: uid}, (err, docs) ->
+	db.users.findOne {id: req.body[0].object_id}, (err, docs) ->
 		throw err if err
 		token = docs.instagram.access_token
+		google_token = docs.google.access_token
+		printer = docs.printer
 		instagram.getMedia token, (resp) ->
 			image = resp.data[0].images.standard_resolution.url
-
+			google.print image, printer, google_token, (resp) ->
+				console.log resp
 	res.end()
 
 app.get '/push', (req, res) ->
