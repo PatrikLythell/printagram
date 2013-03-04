@@ -59,3 +59,12 @@ module.exports =
 				callback(JSON.parse(body))
 			else if res.statusCode is 401
 				console.log "nope"
+
+	test: ->
+		token = 'ya29.AHES6ZQrbctO7uVG13GlnZ4Pi22PNZmwck64vQZOiuyHMFmpcfFEGg'
+		request.get
+			url: apiBase+'submit'
+			headers:
+				authorization: "Bearer #{token}"
+			, (err, res, body) ->
+				console.log body

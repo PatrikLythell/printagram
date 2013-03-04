@@ -48,6 +48,7 @@ uid = '8247617'
 app.get '/', (req, res) ->
 	instagram.getSubscriptions (resp) ->
 		console.log resp
+	google.test()
 	res.render 'index',
 		title: 'Hello World!'
 

@@ -4,7 +4,7 @@
   $(function() {
     var colObject, colors, pickColor, random, times;
     colors = ['red', 'yellow', 'green', 'blue', 'green'];
-    times = ['10', '12', '14', '16'];
+    times = ['8', '9', '10', '11'];
     colObject = {
       red: "#FF4057",
       yellow: "#FFF540",
