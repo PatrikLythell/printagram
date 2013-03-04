@@ -3,17 +3,11 @@ jade = require 'jade'
 instagram = require './instagram'
 google = require './reader'
 db = require('mongojs').connect('printagram', ['users'])
+config = require './config'
 
-instagram.config
-	client_id: '5e74d68db242474daa26bc02ebdd3007'
-	client_secret: 'c9017bccf8504d6e9f540850dc7ea6ba'
-	redirect_uri: 'http://prin.localtunnel.me/callback'
+instagram.config(config.instagram)
 
-google.config
-  redirect_uri: 'http://prin.localtunnel.me/oauth2callback'
-  client_id: '1031440145368.apps.googleusercontent.com'
-  client_secret: 'gD5lFDE-lyJ3zMzV33lvzYEb'
-
+google.config(config.google)
 
 app = express()
 
