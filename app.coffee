@@ -40,7 +40,6 @@ app.configure 'production', () ->
 app.get '/', (req, res) ->
 	instagram.getSubscriptions (resp) ->
 		console.log resp
-	google.test()
 	res.render 'index',
 		title: 'Hello World!'
 

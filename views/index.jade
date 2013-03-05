@@ -1,17 +1,18 @@
 extends layout
 
 block header
+  .row
+    a.span4.offset4.middle(href="/")
+      h4 Print-A-Gram
+      small Connect your printer to Instagram.
   
 block content
   .row
     .span10.offset1.cloud
-      .row-fluid
-        a(href="/google-auth") 
-          .span4.offset4.icons
 
   .row
     .span4.offset4.rounded
-      .bar
+      .span.bar
     .span4.offset4.rainbow
       .span1.border
         .overlay
@@ -31,8 +32,12 @@ block content
           .moving
   .row
     .span12.pic
+  .row(style="position:relative;")
+    .span4
+      .insta-overlay
+      .insta-overlay.hide
 
-  .row
+  .row.instruction-wrap
     .span4.instructions
       span.number 1
       p Connect your Google Cloud Ready printer and your Instagram account to Print-A-Gram.
@@ -42,8 +47,28 @@ block content
     .span4.instructions
       span.number 3
       p Have it printed and waiting for you in polaroids by the time you get home.
-    
 
-      // a(href="/google-auth") Connect to google
+  .row
+    a.span6.offset3.sign-up(href="/google-auth")
+      .row.button
+        .span4.offset1
+          h4 Connect to Print-A-Gram
 
+block footer
+  .row
+    .span4
+      h4 Latest Print-A-Grams
+  .row
+    .span4.latest
+      img(src="/img/insta-1.jpg")
+      span.block
+      span.small-block
+    .span4.latest
+      img(src="/img/insta-1.jpg")
+      span.block
+      span.small-block
+    .span4.latest
+      img(src="/img/insta-1.jpg")
+      span.block
+      span.small-block
 

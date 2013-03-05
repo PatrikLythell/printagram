@@ -1,6 +1,6 @@
 $ ->
 
-  colors = ['red', 'yellow', 'green', 'blue', 'green']
+  colors = ['red', 'yellow', 'green', 'blue']
 
   times = ['8', '9', '10', '11']
 
@@ -14,16 +14,14 @@ $ ->
     return arr[Math.floor(Math.random() * arr.length)]
 
   pickColor = (wrong, callback) ->
-    color = random(colors)
+    color = random(_.without(colors, wrong))
+    color = 'red' if !color
     time = random(times)
-    if color is wrong
-      pickColor(wrong, callback)
-    else
-      for val, i in colors
-        colors.splice(i,1) if val is color
-      for val, i in times
-        times.splice(i,1) if val is time
-      callback(color, time)
+    for val, i in colors
+      colors.splice(i,1) if val is color
+    for val, i in times
+      times.splice(i,1) if val is time
+    callback(color, time)
 
   $('.moving').each ->
     wrongColor = $(this).parent().attr('class').replace('color ', '')
@@ -41,3 +39,14 @@ $ ->
           "-webkit-animation": "move #{time}s linear infinite "
         .addClass('move')
       , 5000
+
+  instaI = 1
+
+  setInterval ->
+    $('.hide').css('opacity', '1')
+    if instaI < 3 then instaI++ else instaI = 1
+    setTimeout ->
+      $('.insta-overlay').first().css("background-image", "url('/img/insta-#{instaI}.jpg')")
+      $('.hide').css('opacity', '0')
+    , 100
+  , 5000

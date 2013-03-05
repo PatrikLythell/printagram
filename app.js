@@ -49,7 +49,6 @@
     instagram.getSubscriptions(function(resp) {
       return console.log(resp);
     });
-    google.test();
     return res.render('index', {
       title: 'Hello World!'
     });

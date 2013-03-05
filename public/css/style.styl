@@ -5,41 +5,107 @@ yellow = #FFF540
 green = #78C130
 blue = #3DB5F2
 dark = #333333
-light = #fff9d5
+light = #fffbe5
 
 body
   background: light
   font-family: 'Bitter', serif
-  font-size: 1.1em
+  font-size: 1em
+
+a
+  color: dark
+  -webkit-transition: all .2s linear
+  &:hover
+    text-decoration: none
+    color: dark
+
+.middle
+  padding: 50px 0 0
+  margin-bottom: -5px 
+  text-align: center
+  small
+    font-size: 0.8em
+    opacity: 0.8
+    margin-top: -5px
+    display: block
 
 .cloud
-  background: url('../img/cloudagram_03.png') center center no-repeat
+  background: url('../img/cloud.png') center center no-repeat
   height: 500px
   background-size: 650px auto
 
-.pic
-  height: 440px
-  background: url('../img/cloudagram_pic.png') 0px 15px no-repeat
-  background-size: 1000px auto
-  margin-left: 0
-  padding: 0 60px 0 0
+.get-started
+  position: relative
+  top: -250px
+  text-align: center
 
-.icons
-  margin-top: 200px
-  height: 150px
+.pic
+  height: 360px
+  margin-top: 15px
+  background: url('../img/cloudagram_03.png') 0px 0 no-repeat
+  background-size: 995px auto
+  margin-left: 0
+  padding: 0 40px 0 0
+
+.insta-overlay
+  z-index: -1
+  position: absolute
+  top: -455px
+  height: 370px
+  width: 370px
+  left: 310px
+  -webkit-transform: perspective(510px) rotateX(70deg)
+  opacity: 0.8
+  background: url('../img/insta-1.jpg') #fff center center no-repeat
+  background-size: cover
+
+.hide
+  opacity: 0
+  display: block
+  background: #fff
+  -webkit-transition: all .1s linear
+
+.icon
+  height: 170px
+  display: block
   background: url('../img/sprite-top.png') no-repeat
-  -webkit-animation: icons 10s linear infinite
+  background-size: auto 150px
+
+.instagram
+  background-position: -50px 0
+
+.plus
+  background-position: -180px 30px
+  background-size: auto 100px
+
+.printer
+  background-position: -560px -5px
 
 .rainbow
   height: 600px
   margin-top: -140px
   z-index: 2
+  margin-left: 345px
+
+.big-title
+  color: #fff
+  position: absolute
+  text-align: center
+  font-size: 5em
+  top: 530px
+  text-shadow: 
+    -3px -3px dark,
+    3px -3px dark,
+    -3px 3px dark,
+    3px 3px dark
 
 .border
-  border: 15px solid #333333
+  border: 15px solid dark
   height: 100%
-  margin: 0 -15px 0 0
+  margin-right: -5px
   border-radius: 10px 10px 0 0
+  margin-left: -10px
+  position: relative
 
 .rounded
   margin-top: -140px
@@ -47,8 +113,8 @@ body
   height: 20px 
   border-radius: 20px
   background: dark
-  width: 110%
-  margin-left: -8px
+  width: 115%
+  margin-left: -20px
 
 .color
   margin-top: -5px
@@ -63,6 +129,12 @@ body
   margin-top: -5px
   border-radius: 5px 5px 0 0
   background: -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,.4)), to(rgba(255,255,255,0)))
+
+.underlay
+  width: 60px
+  height: 40px
+  position: absolute
+  bottom: -5px
 
 .moving
   width: 100%
@@ -79,21 +151,57 @@ body
 .blue
   background: blue
 
+.instruction-wrap
+  margin-top: 50px
+
+
 .instructions
   text-align: center
-  margin-bottom: 100px
   p
     width: 75%
     text-align: left
-    margin: 40px auto
+    margin: 50px auto
 .number
   text-align: center
   font-size: 48px
-  color: light
+  color: white
   border-radius: 50px
-  background: dark
-  padding: 20px 35px
+  background: red
+  padding: 18px 34px
 
+.button
+  text-align: center
+
+.sign-up
+  color: #fff
+  background: blue
+  margin-top: 20px
+  margin-bottom: 100px
+  border-radius: 20px
+  padding: 40px 0
+  h4
+    font-weight: lighter
+
+.latest
+  border: 15px solid dark
+  height: 350px
+  background: #fff
+  box-sizing: border-box
+  margin-bottom: 100px
+  padding: 20px
+  img
+    border: 15px solid dark
+    box-sizing: border-box
+
+.block, .small-block
+  display: block
+  width: 100px
+  height: 15px
+  background: dark
+  margin-top: 10px
+
+.small-block
+  width: 70px
 
 
 @-webkit-keyframes move
@@ -107,52 +215,4 @@ rotate(deg)
 
 @-webkit-keyframes icons
   0%
-    background-position: 0 0
-    opacity: 0
-  5%
     opacity: 1
-  20%
-    rotate(0deg)
-  25%
-    rotate(360deg)
-  28%
-    rotate(720deg)
-  29.5%
-    background-position: 0 0 
-  30%
-    rotate(1080deg)
-    background-position: -250px 0
-  32%
-    rotate(1420deg)
-  35%
-    rotate(1780deg)
-  40%
-    rotate(2140deg)
-    background-position: -250px 0
-  60%
-    rotate(2140deg)
-  65%
-    rotate(1780deg)
-  68%
-    rotate(1420deg)
-  69.5%
-    background-position: -250px 0 
-  70%
-    rotate(1080deg)
-    background-position: -500px 0
-  72%
-    rotate(720deg)
-  75%
-    rotate(360deg)
-  80%
-    rotate(0deg)
-    background-position: -500px 0
-  90%
-    rotate(0deg)
-    background-position: -500px 0
-  95%
-    background-position: -500px 0
-    opacity: 1
-  100%
-    background-position: -500px 0
-    opacity: 0
