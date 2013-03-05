@@ -48,6 +48,27 @@ module.exports =
 				console.log "you're fucked by first one"
 				#console.log res
 
+	refresh: (token, callback) ->
+		params = 
+		  client_secret: client_secret
+		  grant_type: "refresh_token"
+		  refresh_token: token
+		  client_id: client_id
+		request.post
+			url: "https://accounts.google.com/o/oauth2/token"
+			form: params
+		, (err, res, body) ->
+			body = JSON.parse(body)
+			callback(body.access_token)
+
+	test: ->
+		request.get
+			url: apiBase+'submit'
+			headers:
+				authorization: "Bearer ya29.AHES6ZQHTH12OgzUR1zvRh-9IdOp1zFHVSpkue8kauW2Tuk"
+		, (err, res, body) ->
+			console.log body
+
 	getPrinters: (token, callback) ->
 		request.get 
 			url: apiBase+'search?access_token='+token
@@ -66,8 +87,13 @@ module.exports =
 		request.get
 			url: "#{apiBase}submit?title=test&content=#{image}&tag=null&contentType=url&printerid=#{printerid}"
 			headers:
-				"X-Cloudprint-Proxy": "Google-JS"
-				Authorization: "Bearer #{token}"
+				authorization: "Bearer #{token}"
 		, (err, res, body) ->
-			console.log res
+			# console.log res
 			callback(JSON.parse(body))
+
+	jobs: (printerid) ->
+		request.get
+			url: "#{apiBase}jobs?printerid={#printerid}"
+		, (err, res, body) ->
+			console.log body

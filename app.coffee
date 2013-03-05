@@ -4,6 +4,7 @@ instagram = require './instagram'
 google = require './reader'
 db = require('mongojs').connect('printagram', ['users'])
 config = require './config'
+canvas = require './canvas'
 
 instagram.config(config.instagram)
 
@@ -40,6 +41,9 @@ app.configure 'production', () ->
 app.get '/', (req, res) ->
 	instagram.getSubscriptions (resp) ->
 		console.log resp
+	# google.jobs('a63a5007-5ab5-5db1-f6d8-45a2a972a3b6')
+	# canvas.makeA6 "hej", "ho", (resp) ->
+	# console.log new Date(1362353601*1000)
 	res.render 'index',
 		title: 'Hello World!'
 
@@ -71,12 +75,20 @@ app.post '/push', (req, res) ->
 	db.users.findOne {id: req.body[0].object_id}, (err, docs) ->
 		throw err if err
 		token = docs.instagram.access_token
-		google_token = docs.google.access_token
 		printer = docs.printer
 		instagram.getMedia token, (resp) ->
+			# console.log resp
+			console.log resp.data[0].caption
 			image = resp.data[0].images.standard_resolution.url
-			google.print image, printer, google_token, (resp) ->
-				console.log resp
+			caption = resp.data[0].caption.text
+			date = resp.data[0].caption.created_time
+			docs.google.refresh_token
+			google.refresh docs.google.refresh_token, (resp) ->
+				google_token = resp
+				canvas.makeA6 caption, image, date, ->
+					console.log "printed pic"
+				#google.print image, printer, google_token, (resp) ->
+					#console.log resp
 	res.end()
 
 app.get '/push', (req, res) ->
