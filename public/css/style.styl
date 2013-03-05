@@ -17,7 +17,7 @@ a
   -webkit-transition: all .2s linear
   &:hover
     text-decoration: none
-    color: dark
+    color: blue
 
 .middle
   padding: 50px 0 0
@@ -33,6 +33,13 @@ a
   background: url('../img/cloud.png') center center no-repeat
   height: 500px
   background-size: 650px auto
+  h4
+    text-align: center
+    margin-top: 180px
+    padding: 100px
+    -webkit-animation: pulse 1.8s linear infinite
+    &:hover
+      -webkit-animation: none
 
 .get-started
   position: relative
@@ -46,9 +53,11 @@ a
   background-size: 995px auto
   margin-left: 0
   padding: 0 40px 0 0
+  z-index: 3
+  position: relative
 
 .insta-overlay
-  z-index: -1
+  z-index: 1
   position: absolute
   top: -455px
   height: 370px
@@ -86,6 +95,8 @@ a
   margin-top: -140px
   z-index: 2
   margin-left: 345px
+
+
 
 .big-title
   color: #fff
@@ -172,6 +183,7 @@ a
 .button
   text-align: center
 
+
 .sign-up
   color: #fff
   background: blue
@@ -181,6 +193,9 @@ a
   padding: 40px 0
   h4
     font-weight: lighter
+  &:hover
+    color: dark
+
 
 .latest
   border: 15px solid dark
@@ -213,6 +228,10 @@ a
 rotate(deg)
   -webkit-transform: rotateY(deg)
 
-@-webkit-keyframes icons
+@-webkit-keyframes pulse
   0%
+    opacity: 0
+  50%
     opacity: 1
+  100%
+    opacity: 0
