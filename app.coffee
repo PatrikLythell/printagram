@@ -52,13 +52,23 @@ app.get '/auth', (req, res) ->
 		res.redirect(resp)
 
 app.get '/google-auth', (req, res) ->
-	google.auth (resp) ->
-		res.redirect(resp)
+	if req.session.instagram and req.session.instagram.user.id
+		db.users.findOne
+			id: req.session.instagram.user.id
+		, (err, docs) ->
+			if docs is null
+				google.auth (resp) ->
+					res.redirect(resp)
+			else
+				res.redirect 'profile'
+	else
+		google.auth (resp) ->
+			res.redirect(resp)
 
 app.get '/callback', (req, res) ->
 	instagram.reqAccToken req.query.code, (resp) ->
 		req.session.instagram = resp
-		res.redirect '/finished'
+		res.redirect '/paper-size'
 
 app.get '/oauth2callback', (req, res) -> 
 	google.getToken req.query.code, (resp) ->
@@ -75,7 +85,7 @@ app.post '/push', (req, res) ->
 	db.users.findOne {id: req.body[0].object_id}, (err, docs) ->
 		throw err if err
 		token = docs.instagram.access_token
-		printer = docs.printer
+		printer = docs.printer.id
 		instagram.getMedia token, (resp) ->
 			# console.log resp
 			console.log resp.data[0].caption
@@ -92,13 +102,7 @@ app.post '/push', (req, res) ->
 	res.end()
 
 app.get '/push', (req, res) ->
-	# Handle first incoming get request
-	console.log req.query['hub.challenge']
-	# console.log challenge
 	res.send(req.query['hub.challenge'])
-		
-	#instagram.confirm challenge, (resp) ->
-		#console.log "ok"
 
 app.get '/find-printer', (req, res) ->
 	console.log req.session
@@ -108,12 +112,38 @@ app.get '/find-printer', (req, res) ->
 			printers: resp
 			
 app.get '/save-printer', (req, res) ->
-	req.session.printer = req.query.printerID
-	res.redirect '/add-instagram'
+	console.log req.headers
+	req.session.printer = 
+		name: req.query.printerName
+		id: req.query.printerId
+	console.log req.session
+	if req.headers['x-pjax']
+		res.render 'pjax/add-instagram'
+			printer: req.query.printerName
+	else
+		res.render 'add-instagram'
+		  printer: req.query.printerName
+
+app.get '/save-size', (req, res) ->
+	req.session.size = 
+		size: req.query.paperSize
+	if req.headers['x-pjax']
+		res.render 'pjax/profile'
+	else
+		res.render 'profile'
+
+app.get '/profile', (req, res) ->
+	if req.headers['x-pjax']
+		res.render 'pjax/profile'
+	else
+		res.render 'profile'
 
 app.get '/add-instagram', (req, res) ->
 	res.render 'add-instagram'
 		printer: req.session.printer
+
+app.get '/paper-size', (req, res) ->
+	res.render 'paper-size'
 
 app.get '/finished', (req, res) ->
 	console.log req.session

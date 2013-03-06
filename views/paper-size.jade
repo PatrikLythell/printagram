@@ -1,0 +1,26 @@
+extends layout
+
+block header
+  .row
+    .span4.offset4.middle
+      h4 Print-A-Gram
+      small Connect your printer to Instagram.
+  
+block content
+  .row
+    .span10.offset1.middle
+      h1 Select your Paper Size.
+      h5 (we recommend A6)
+  .row.paper-wrap
+    .span2.offset2.paper
+      .paper-icon.a4(data-name="A4") A4
+    .span2.paper
+      .paper-icon.a5(data-name="A4") A5
+    .span2.paper
+      .paper-icon.a6.selected(data-name="A4") A6
+    .span2.paper 
+      .paper-icon.a7(data-name="A4") A7
+  .row
+    form.choose-printer.span4.offset4(action="/save-size", method="GET", data-pjax=".main")
+      input#papersize(type="hidden", name="paperSize", value="A6")
+      input.btn.btn-large.btn-block.btn-info(type="submit", value="Choose Size")

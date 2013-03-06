@@ -50,3 +50,28 @@ $ ->
       $('.hide').css('opacity', '0')
     , 100
   , 5000
+
+  $('.printer-icon').click ->
+    $('#printername').val($(this).data('name'))
+    $('#printerid').val($(this).data('id'))
+    $(this).addClass('active').siblings().removeClass('active')
+    $('.disabled').removeClass('disabled')
+
+  $('.paper-icon').click ->
+    $('#papersize').val($(this).data('name'))
+    $('.selected').removeClass('selected')
+    $(this).addClass('selected')
+
+  $(document).on 'submit', 'form[data-pjax]', (event) ->
+    $.pjax.submit(event, '.main')
+
+  $(document).on 'pjax:timeout', (event) ->
+    # Prevent default timeout redirection behavior
+    event.preventDefault()
+
+  $(document).on 'pjax:send', ->
+    $('.main').addClass('fadeout')
+    $('#loading').show()
+  .on 'pjax:complete', ->
+    $('.main').removeClass('fadeout')
+    $('#loading').hide()

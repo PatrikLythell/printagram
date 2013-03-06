@@ -2,15 +2,24 @@ extends layout
 
 block header
   .row
-    span.span4
+    .span4.offset4.middle
+      h4 Print-A-Gram
+      small Connect your printer to Instagram.
   
 block content
   .row
-    span.span8
-      form(action="/save-printer", method="get")
-        select(name="printerID")
-          for printer in printers.printers
-            if printer.type == 'GOOGLE'
-              option(value="#{printer.id}")= printer.displayName
-        input(type="submit", value="Add printer")
+    .span10.offset1.middle
+      h1 Select the printer you want to use.
+      h5 (A Google Cloud Ready wifi printer is recommended)
+  .row
+    .span12.printer-wrap
+      for printer, i in printers.printers
+        if printer.type == 'GOOGLE'
+          .printer-icon(data-name="#{printer.displayName}", data-id="#{printer.id}")
+            span.check
+            span= printer.displayName.slice(0,18)
+    form.choose-printer.span4.offset4(action="/save-printer", method="GET", data-pjax=".main")
+      input#printername(type="hidden", name="printerName")
+      input#printerid(type="hidden", name="printerId")
+      input.btn.btn-large.btn-block.btn-info.disabled(type="submit", value="Add printer")
 

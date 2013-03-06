@@ -2,13 +2,18 @@ extends layout
 
 block header
   .row
-    .span4
+    .span4.offset4.middle
+      h4 Print-A-Gram
+      small Connect your printer to Instagram.
   
 block content
   .row
-    .span8
-      p= printer
+    .span10.offset1.middle
+      h1 Connect your Instagram Account.
+      h5 
+        a(href="http://instagram.com") (or click here to get one)
   .row
-    .span8
-      a(href="/auth") Connect to instagram
-
+    .span2.offset5.instagram-icon
+  .row
+    .span4.offset4
+      a.btn.btn-large.btn-info.btn-block(href="/auth") Connect to instagram

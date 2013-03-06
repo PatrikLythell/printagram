@@ -19,6 +19,18 @@ a
     text-decoration: none
     color: blue
 
+#loading
+  opacity: 0
+  pointer-events: none
+  -webkit-transition: .1s linear all
+
+.main
+  opacity: 1
+  -webkit-transition: opacity .1s ease-in
+
+.fadeout
+  opacity: 0
+
 .middle
   padding: 50px 0 0
   margin-bottom: -5px 
@@ -217,6 +229,92 @@ a
 
 .small-block
   width: 70px
+
+.printer-wrap
+  text-align: center
+  margin-top: 30px
+
+.instagram-icon
+  height: 180px
+  background: url('../img/sprite-top.png') -50px center no-repeat
+  text-align: center
+  display: inline-block
+
+.printer-icon
+  height: 220px
+  width: 180px
+  background: #fff url('../img/sprite-top.png') -540px 35px no-repeat
+  border-radius: 10px
+  border: 5px solid dark
+  text-align: center
+  margin-right: 20px
+  display: inline-block
+  margin-bottom: 30px
+  &:hover
+    cursor: pointer
+  &:hover .check
+    background: green
+  &:last-child
+    margin-right: 0
+  .check
+    height: 20px
+    width: 20px
+    background: light
+    display: block
+    border-radius: 20px
+    border: 3px solid dark
+    margin: 10px auto 155px
+    -webkit-transition: all .1s ease-in
+
+.active .check
+  background: green
+
+.paper-wrap
+ margin-left: 10px
+ margin-top: 30px
+ margin-bottom: 30px
+
+.paper
+  height: 200px
+  position: relative
+  text-align: center
+  div
+    border: 5px solid dark
+    box-sizing: border-box
+    position: absolute
+    box-sizing: border-box
+    width: auto
+    bottom: 0px
+    background-color: transparent
+    -webkit-transition: background-color .2s ease-in
+  .a4
+    height: 100%
+    width: 100%
+    padding-top: 50px
+    font-size: 2em
+  .a5
+    height: 80%
+    width: 80%
+    margin-left: 30px
+    padding-top: 45px
+    font-size: 1.8em
+  .a6
+    height: 60%
+    width: 60%
+    margin-left: 20px
+    padding-top: 30px
+    font-size: 1.6em
+  .a7
+    height: 40%
+    width: 40%
+    margin-left: -20px
+    padding-top: 20px
+    font-size: 1.4em
+  &:hover div
+    background-color: #fff
+    cursor: pointer
+  .selected
+    background-color: #fff
 
 
 @-webkit-keyframes move
