@@ -48,7 +48,7 @@
   });
 
   app.get('/', function(req, res) {
-    instagram.getSubscriptions(function(resp) {
+    canvas.make("A6", "Search for media in a given area. The default time span is set to 5 days. The time span must not exceed 7 days. Defaults time stamps cover the last 5 days.", "http://distilleryimage2.s3.amazonaws.com/6256154e840d11e2a5bc22000a9e2899_7.jpg", "1279332030", function(resp) {
       return console.log(resp);
     });
     return res.render('index', {

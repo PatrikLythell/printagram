@@ -39,8 +39,10 @@ app.configure 'production', () ->
 # ROUTES
 
 app.get '/', (req, res) ->
-	instagram.getSubscriptions (resp) ->
+	canvas.make "A6", "Search for media in a given area. The default time span is set to 5 days. The time span must not exceed 7 days. Defaults time stamps cover the last 5 days.", "http://distilleryimage2.s3.amazonaws.com/6256154e840d11e2a5bc22000a9e2899_7.jpg", "1279332030", (resp) ->
 		console.log resp
+	# instagram.getSubscriptions (resp) ->
+		# console.log resp
 	# google.jobs('a63a5007-5ab5-5db1-f6d8-45a2a972a3b6')
 	# canvas.makeA6 "hej", "ho", (resp) ->
 	# console.log new Date(1362353601*1000)
