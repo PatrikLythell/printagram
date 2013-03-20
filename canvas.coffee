@@ -5,14 +5,14 @@ request = require 'request'
 
 class createPic
   
-  constructor: (@caption, @pic, @date, @callback) ->
+  constructor: (@paper, @caption, @pic, @date, @callback) ->
     @date = new Date(parseInt(date)*1000)
     @i = 0
-    @canvas = new Canvas(1240, 1748)
+    @canvas = new Canvas(@paper.width, @paper.height)
     @ctx = @canvas.getContext('2d')
     @ctx.patternQuality = 'best'
     @ctx.fillStyle = '#fff'
-    @ctx.fillRect(0, 0, 1240, 1748)
+    @ctx.fillRect(0, 0, @paper.width, @paper.height)
     @drawImage()
     @drawText()
 
@@ -23,7 +23,7 @@ class createPic
     , (err, res, body) =>
       img = new Image
       img.src = body
-      @ctx.drawImage(img, 75, 75, 1090, 1090)
+      @ctx.drawImage(img, @paper.margin, @paper.margin, @paper.image, @paper.image)
       @callbackCounter("drawimage")
 
   drawText: ->
@@ -31,44 +31,31 @@ class createPic
     month = @date.getMonth() + 1
     date = @date.getFullYear().toString() + '.' + month + '.' + @date.getDate().toString()
     @ctx.fillStyle = '#000'
-    @ctx.font = '36px PrestigeEliteStd-Bd'
-    linebreak = 1240
-    if caption.length > 100
-        caption = caption.slice(0, 130) + '...' if caption.length > 135
-        for num in [90..0]
-          letter = caption.charAt(num)
-          if letter is " "
-            thirdLine = caption.slice(num+1)
-            for nextNum in [45..0]
-              letter = caption.charAt(nextNum)
-              if letter is " "
-                secondLine = caption.slice(nextNum+1, num)
-                firstLine = caption.slice(0, nextNum)
-                break
+    @ctx.font = @paper.fontSize + ' PrestigeEliteStd-Bd'
+    linebreak = @paper.lineBreak
+    lineHeight = @paper.lineHeight
+    stringArr = []
+    if caption.length > 45
+      stringArr = []
+      i = 0
+      for num in [0..Math.floor(caption.length/45)]
+        for char in [(i+45)..i]
+          if caption.charAt(char) is " "
+            stringArr.push(char) 
             break
-        @ctx.fillText(firstLine, 100, linebreak)
-        linebreak +=60
-        @ctx.fillText(secondLine, 100, linebreak)
-        linebreak +=60
-        @ctx.fillText(thirdLine, 100, linebreak)
-        @ctx.fillText(date, 100, linebreak+80)
-        @callbackCounter("drawtext")
-      else if caption.length > 50
-        for num in [45..0]
-          letter = caption.charAt(num)
-          if letter is " "
-            firstLine = caption.slice(0, num)
-            secondLine = caption.slice(num+1)
-            break
-        @ctx.fillText(firstLine, 100, linebreak)
-        linebreak +=60
-        @ctx.fillText(secondLine, 100, linebreak)
-        @ctx.fillText(date, 100, linebreak+80)
-        @callbackCounter()
-      else
-        @ctx.fillText(caption, 100, linebreak)
-        @ctx.fillText(date, 100, linebreak+80)
-        @callbackCounter()
+        i += 45
+      start = 0
+      for breakPoint, i in stringArr
+        breakPoint = undefined if i+1 is stringArr.length 
+        @ctx.fillText(str.slice(start, breakPoint), 100, linebreak)
+        start += breakPoint-start+1
+        linebreak +=lineHeight
+      @ctx.fillText(date, 100, lineHeight+(lineHeight*1.2))
+      @callbackCounter()
+    else
+      @ctx.fillText(caption, 100, linebreak)
+      @ctx.fillText(date, 100, linebreak+80)
+      @callbackCounter()
 
   callbackCounter: (who) ->
     @i++
@@ -91,9 +78,18 @@ class createPic
       console.log "saved image"
       @callback(picName + '.jpeg')
 
+paperSizes =
+  A6:
+    height: 1748
+    width : 1240
+    lineHeight: 60
+    lineBreak: 1240
+    margin: 75
+    image: 1090
+    fontSize: '36px'
 
 module.exports =
   
   make: (size, caption, pic, date, callback) ->
-    createPic caption, pic, date, (resp) ->
+    createPic paperSizes[size], caption, pic, date, (resp) ->
       callback(resp)
