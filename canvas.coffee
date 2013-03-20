@@ -3,7 +3,7 @@ Image = Canvas.Image
 fs = require 'fs'
 request = require 'request'
 
-class A6
+class createPic
   
   constructor: (@caption, @pic, @date, @callback) ->
     @date = new Date(parseInt(date)*1000)
@@ -95,5 +95,5 @@ class A6
 module.exports =
   
   make: (size, caption, pic, date, callback) ->
-    test = new A6 caption, pic, date, (resp) ->
+    createPic caption, pic, date, (resp) ->
       callback(resp)
